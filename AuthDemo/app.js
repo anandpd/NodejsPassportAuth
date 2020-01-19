@@ -23,7 +23,7 @@ passport.serializeUser(user.serializeUser())
 passport.deserializeUser(user.deserializeUser())
 passport.use(new localStrategy(user.authenticate()))
 
-mongoose.connect("mongodb://localhost:27017/AuthDemo")
+mongoose.connect("mongodb://localhost:27017/AuthDemo",{ useUnifiedTopology: true,useNewUrlParser: true })
 
 //  ************    ROUTES  **********************// 
 app.get('/', (req, res) => res.render('home'))
@@ -40,7 +40,7 @@ app.post('/register',(req,res)=>{
         } 
         else{
             passport.authenticate('local')(req,res,function(){
-                res.redirect('/welcome',{user: user})
+                res.redirect('/welcome')
             })
         }
     })
